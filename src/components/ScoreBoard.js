@@ -18,9 +18,12 @@ class ScoreBoard extends Component {
     }
   }
 
-  componentDidMount() {
-    // Load today's games from NHL schedule endpoint
-    fetch("https://statsapi.web.nhl.com/api/v1/schedule")
+  loadSchedule() {
+    // Load games from NHL schedule endpoint
+    let scheduleUrl = "https://statsapi.web.nhl.com/api/v1/schedule"
+    if(this.props.scheduleDate) scheduleUrl += "?date=" + this.props.scheduleDate
+    console.log(scheduleUrl);
+    fetch(scheduleUrl)
       .then(res => res.json())
       .then(
         (result) => {
@@ -38,6 +41,16 @@ class ScoreBoard extends Component {
           })
         }
       )
+  }
+
+  componentDidMount() {
+    this.loadSchedule()
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.scheduleDate != prevProps.scheduleDate) {
+      this.loadSchedule()
+    }
   }
 
   render() {
@@ -76,7 +89,7 @@ class ScoreBoard extends Component {
     } else {
       return (
         <div className="text-center">
-          <em>No games on the schedule for today!</em>
+          <em>No games on the schedule!</em>
         </div>
       )
     }
