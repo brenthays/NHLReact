@@ -119,9 +119,9 @@ class LineScore extends Component {
     } else {
       return (
         <div className="Calendar container">
-          <div className="row mb-3">
-            <div className="col-md-4">
-              <div className="input-group">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="input-group mb-4">
                 <div className="input-group-prepend">
                   <label className="input-group-text" htmlFor="dateSelect">
                     <FontAwesomeIcon icon="calendar"/>
@@ -136,9 +136,9 @@ class LineScore extends Component {
                 />
               </div>
             </div>
-            <div className="col-md-8">
-              <div className="form-inline float-right">
-                <div className="form-group mr-2">
+            <div className="col-md-6">
+              <div className="form-inline float-md-right mb-4">
+                <div className="form-group mr-2 d-none d-md-block">
                   <label>Jump To:</label>
                 </div>
                 <div className="form-group">
@@ -150,6 +150,7 @@ class LineScore extends Component {
                   />
                 </div>
               </div>
+              <div className="clearfix"></div>
             </div>
           </div>
           <ScoreBoard
