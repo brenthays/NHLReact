@@ -63,8 +63,8 @@ class SkaterTable extends Component {
             </thead>
             <tbody>
               {players.map(player => (
-                <tr>
-                  <td>
+                <tr key={player.person.id}>
+                  <td>            
                     {player.person.fullName}
                   </td>
                   <td>
