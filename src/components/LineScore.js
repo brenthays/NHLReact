@@ -67,7 +67,7 @@ class LineScore extends Component {
                   {lineScore.currentPeriod ? 'P'+ lineScore.currentPeriod + ' - ' + lineScore.currentPeriodTimeRemaining : 'Game Start'}
                 </th>
                 {lineScore.periods.map(period => (
-                  <th className="text-center">{period.num}</th>
+                  <th className="text-center" key={period.num}>{period.num}</th>
                 ))}
                 {emptyPeriods.map(p => (
                   <th className="text-center">{p}</th>
@@ -79,20 +79,20 @@ class LineScore extends Component {
               <tr>
                 <td className="text-left">{gameFeed.gameData.teams.away.name}</td>
                 {lineScore.periods.map(period => (
-                  <td className="text-center" width="50px">{period.away.goals}</td>
+                  <td className="text-center" width="50px" key={period.num}>{period.away.goals}</td>
                 ))}
                 {emptyPeriods.map(p => (
-                  <td className="text-center" width="50px">-</td>
+                  <td className="text-center" width="50px" key={p}>-</td>
                 ))}
                 <td className="text-center" width="50px"><strong>{gameFeed.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals}</strong></td>
               </tr>
               <tr>
                 <td className="text-left">{gameFeed.gameData.teams.home.name}</td>
                 {lineScore.periods.map(period => (
-                  <td className="text-center" width="50px">{period.home.goals}</td>
+                  <td className="text-center" width="50px" key={period.num}>{period.home.goals}</td>
                 ))}
                 {emptyPeriods.map(p => (
-                  <td className="text-center" width="50px">-</td>
+                  <td className="text-center" width="50px" key={p}>-</td>
                 ))}
                 <td className="text-center" width="50px"><strong>{gameFeed.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals}</strong></td>
               </tr>

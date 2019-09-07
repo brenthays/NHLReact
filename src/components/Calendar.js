@@ -29,23 +29,26 @@ class LineScore extends Component {
     const now = new Date()
     const selectedSeasonBegin = new Date(selectedSeason.value.regularSeasonStartDate+"T20:00:00Z")
     const selectedSeasonEnd = new Date(selectedSeason.value.regularSeasonEndDate+"T20:00:00Z")
-    const selectedDate = now > selectedSeasonBegin && now < selectedSeasonEnd ? now : selectedSeasonBegin;
+    const selectedDate = now > selectedSeasonBegin && now < selectedSeasonEnd ? now : selectedSeasonBegin
     const selectedDateYMD = selectedDate.toISOString().split('T')[0]
+
+    localStorage.setItem('CalendarSelectedDate', selectedDate)
 
     this.setState({
       selectedSeason: selectedSeason,
       selectedDate: selectedDate,
       selectedDateYMD: selectedDateYMD
-    });
+    })
   }
 
   handleDateChange(selectedDate) {
     const selectedDateYMD = selectedDate.toISOString().split('T')[0]
+    localStorage.setItem('CalendarSelectedDate', selectedDate)
 
     this.setState({
       selectedDate: selectedDate,
       selectedDateYMD: selectedDateYMD
-    });
+    })
   }
 
   componentDidMount() {
@@ -62,11 +65,22 @@ class LineScore extends Component {
               label: seasonName
             })
           })
+
           const selectedSeason = seasonOptions[0]
-          const now = new Date()
-          const selectedSeasonBegin = new Date(selectedSeason.value.regularSeasonStartDate+"T20:00:00Z")
-          const selectedSeasonEnd = new Date(selectedSeason.value.regularSeasonEndDate+"T20:00:00Z")
-          const selectedDate = now > selectedSeasonBegin && now < selectedSeasonEnd ? now : selectedSeasonBegin;
+
+          // initialize date of calendar
+          const storedDate = localStorage.getItem('CalendarSelectedDate')
+          let selectedDate
+          if(storedDate) {
+            selectedDate = new Date(storedDate)
+          } else {
+            const now = new Date()
+            const selectedSeasonBegin = new Date(selectedSeason.value.regularSeasonStartDate+"T20:00:00Z")
+            const selectedSeasonEnd = new Date(selectedSeason.value.regularSeasonEndDate+"T20:00:00Z")
+            selectedDate = now > selectedSeasonBegin && now < selectedSeasonEnd ? now : selectedSeasonBegin
+          }
+
+          // formatted date string
           const selectedDateYMD = selectedDate.toISOString().split('T')[0]
 
           this.setState({
@@ -104,12 +118,12 @@ class LineScore extends Component {
       )
     } else {
       return (
-        <div className="SelectSeason container">
+        <div className="Calendar container">
           <div className="row mb-3">
             <div className="col-md-4">
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="dateSelect">
+                  <label className="input-group-text" htmlFor="dateSelect">
                     <FontAwesomeIcon icon="calendar"/>
                   </label>
                 </div>
@@ -118,6 +132,7 @@ class LineScore extends Component {
                   onChange={this.handleDateChange.bind(this)}
                   className="form-control"
                   dateFormat="MMM dd, yyyy"
+                  id="dateSelect"
                 />
               </div>
             </div>

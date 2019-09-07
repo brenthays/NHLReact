@@ -48,7 +48,7 @@ class ScoreBoard extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.scheduleDate != prevProps.scheduleDate) {
+    if(this.props.scheduleDate !== prevProps.scheduleDate) {
       this.loadSchedule()
     }
   }
