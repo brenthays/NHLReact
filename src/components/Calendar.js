@@ -33,6 +33,7 @@ class LineScore extends Component {
     const selectedDateYMD = selectedDate.toISOString().split('T')[0]
 
     localStorage.setItem('CalendarSelectedDate', selectedDate)
+    localStorage.setItem('CalendarSelectedDateTimestamp', now)
 
     this.setState({
       selectedSeason: selectedSeason,
@@ -43,7 +44,9 @@ class LineScore extends Component {
 
   handleDateChange(selectedDate) {
     const selectedDateYMD = selectedDate.toISOString().split('T')[0]
+    const now = new Date()
     localStorage.setItem('CalendarSelectedDate', selectedDate)
+    localStorage.setItem('CalendarSelectedDateTimestamp', now)
 
     this.setState({
       selectedDate: selectedDate,
@@ -70,8 +73,19 @@ class LineScore extends Component {
 
           // initialize date of calendar
           const storedDate = localStorage.getItem('CalendarSelectedDate')
+          const storedDateTimestamp = localStorage.getItem('CalendarSelectedDateTimestamp')
+          const now = new Date()
+          let useStoredDate = false
+
+          // only use storedDate if it was set recently
+          if(storedDate && storedDateTimestamp) {
+            const storedDateTimestampObj = new Date(storedDateTimestamp)
+            const hourDiff = Math.abs(now.getTime() - storedDateTimestampObj.getTime()) / 36e5;
+            useStoredDate = hourDiff < 3;
+          }
+
           let selectedDate
-          if(storedDate) {
+          if(useStoredDate) {
             selectedDate = new Date(storedDate)
           } else {
             const now = new Date()
