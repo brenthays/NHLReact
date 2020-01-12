@@ -99,7 +99,7 @@ class GameStats extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6">
+              <div className="col-lg-12">
                 <h3>Team Stats</h3>
                   <Nav pills fill>
                     <NavItem>

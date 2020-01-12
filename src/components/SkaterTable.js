@@ -53,27 +53,27 @@ class SkaterTable extends Component {
       return (
         <div className="StatsTable">
           <table className="table table-striped table-hover">
-            <thead className="thead-light">
+            <thead className="thead-dark">
               <tr>
                 <th>Skater</th>
-                <th>Goals</th>
-                <th>Assists</th>
-                <th>TOI</th>
+                <th className="text-right">Goals</th>
+                <th className="text-right">Assists</th>
+                <th className="text-right">TOI</th>
               </tr>
             </thead>
             <tbody>
               {players.map(player => (
                 <tr key={player.person.id}>
-                  <td>            
+                  <td>
                     {player.person.fullName}
                   </td>
-                  <td>
-                    {player.stats.skaterStats.goals}
+                  <td className="text-right">
+                    {player.stats.skaterStats.goals > 0 ? player.stats.skaterStats.goals : '-'}
                   </td>
-                  <td>
-                    {player.stats.skaterStats.assists}
+                  <td className="text-right">
+                    {player.stats.skaterStats.assists > 0 ? player.stats.skaterStats.assists : '-'}
                   </td>
-                  <td>
+                  <td className="text-right">
                     {player.stats.skaterStats.timeOnIce}
                   </td>
                 </tr>

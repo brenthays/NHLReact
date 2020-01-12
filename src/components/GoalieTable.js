@@ -46,12 +46,12 @@ class GoalieTable extends Component {
       return (
         <div className="StatsTable">
           <table className="table table-striped table-hover">
-            <thead className="thead-light">
+            <thead className="thead-dark">
               <tr>
                 <th>Goalie</th>
-                <th>Saves</th>
-                <th>SV%</th>
-                <th>TOI</th>
+                <th className="text-right">Saves</th>
+                <th className="text-right">SV%</th>
+                <th className="text-right">TOI</th>
               </tr>
             </thead>
             <tbody>
@@ -60,13 +60,13 @@ class GoalieTable extends Component {
                   <td>
                     {player.person.fullName}
                   </td>
-                  <td>
+                  <td className="text-right">
                     {player.stats.goalieStats.saves}
                   </td>
-                  <td>
+                  <td className="text-right">
                     {player.stats.goalieStats.savePercentage ? parseFloat(Math.round(player.stats.goalieStats.savePercentage*100)/10000).toFixed(3) : '-'}
                   </td>
-                  <td>
+                  <td className="text-right">
                     {player.stats.goalieStats.timeOnIce}
                   </td>
                 </tr>
