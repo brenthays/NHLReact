@@ -43,7 +43,9 @@ class LineScore extends Component {
   }
 
   handleDateChange(selectedDate) {
-    const selectedDateYMD = selectedDate.toISOString().split('T')[0]
+    let selectedDateCopy = selectedDate
+    selectedDateCopy.setHours(0,0,0)
+    const selectedDateYMD = selectedDateCopy.toISOString().split('T')[0]
     const now = new Date()
     localStorage.setItem('CalendarSelectedDate', selectedDate)
     localStorage.setItem('CalendarSelectedDateTimestamp', now)
@@ -88,7 +90,6 @@ class LineScore extends Component {
           if(useStoredDate) {
             selectedDate = new Date(storedDate)
           } else {
-            const now = new Date()
             const selectedSeasonBegin = new Date(selectedSeason.value.regularSeasonStartDate+"T20:00:00Z")
             const selectedSeasonEnd = new Date(selectedSeason.value.regularSeasonEndDate+"T20:00:00Z")
             selectedDate = now > selectedSeasonBegin && now < selectedSeasonEnd ? now : selectedSeasonBegin
